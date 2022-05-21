@@ -1,0 +1,14 @@
+###
+GET http://localhost/admin/product/getCategory1
+
+###
+### 保存品牌
+POST http://localhost/admin/product/baseTrademark/save
+Accept: application/json
+Content-Type: application/json
+{
+"tmName": "锤子",
+ "logoUrl": "123"
+}
+
+###

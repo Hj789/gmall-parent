@@ -1,0 +1,87 @@
+{
+  "id": null,
+  "spuName": "AppleiPhone 13 Pro",
+  "description": "Apple iPhone 13 Pro (A2639) 256GB 远峰蓝色 支持移动联通电信5G 双卡双待手机",
+  "category3Id": 61,
+  "spuImageList": [
+    {
+      "imgName": "4.png",
+      "imgUrl": "http://192.168.203.203:9000/gmall/01d409357bdd49158728e4a9181a1a19_4.png"
+    },
+    {
+      "imgName": "1.png",
+      "imgUrl": "http://192.168.203.203:9000/gmall/9af21c86aae641469674c121417899b7_1.png"
+    },
+    {
+      "imgName": "5.png",
+      "imgUrl": "http://192.168.203.203:9000/gmall/acb42f98add84f97ac8edddef3a60e4b_5.png"
+    },
+    {
+      "imgName": "3.png",
+      "imgUrl": "http://192.168.203.203:9000/gmall/18751fee237c4f91937da7ee5ba885e3_3.png"
+    },
+    {
+      "imgName": "2.png",
+      "imgUrl": "http://192.168.203.203:9000/gmall/34ada559bb3849cfaa9d27a06a3284ec_2.png"
+    },
+    {
+      "imgName": "5.png",
+      "imgUrl": "http://192.168.203.203:9000/gmall/a21b522d02c84b99b81ed5a242250cd8_5.png"
+    },
+    {
+      "imgName": "4.png",
+      "imgUrl": "http://192.168.203.203:9000/gmall/d8fd9f07de334b3e837463c59b04bfda_4.png"
+    },
+    {
+      "imgName": "1.png",
+      "imgUrl": "http://192.168.203.203:9000/gmall/006e94e45a424ccda7e0ff13aa05627f_1.png"
+    },
+    {
+      "imgName": "2.png",
+      "imgUrl": "http://192.168.203.203:9000/gmall/28a86b944ef84d339433605207810c0a_2.png"
+    },
+    {
+      "imgName": "3.png",
+      "imgUrl": "http://192.168.203.203:9000/gmall/2b705670155643b098346fb520c2d921_3.png"
+    }
+  ],
+  "spuSaleAttrList": [
+    {
+      "baseSaleAttrId": "1",
+      "saleAttrName": "选择颜色",
+      "spuSaleAttrValueList": [
+        {
+          "baseSaleAttrId": "1",
+          "saleAttrValueName": "远峰蓝色"
+        },
+        {
+          "baseSaleAttrId": "1",
+          "saleAttrValueName": "石墨色"
+        },
+        {
+          "baseSaleAttrId": "1",
+          "saleAttrValueName": "银色"
+        }
+      ]
+    },
+    {
+      "baseSaleAttrId": "2",
+      "saleAttrName": "选择版本",
+      "spuSaleAttrValueList": [
+        {
+          "baseSaleAttrId": "2",
+          "saleAttrValueName": "128G"
+        },
+        {
+          "baseSaleAttrId": "2",
+          "saleAttrValueName": "256G"
+        },
+        {
+          "baseSaleAttrId": "2",
+          "saleAttrValueName": "512G"
+        }
+      ]
+    }
+  ],
+  "tmId": 12
+}
