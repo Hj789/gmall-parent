@@ -3,6 +3,8 @@ package com.atguigu.gmall.product.service.impl;
 import com.atguigu.gmall.model.product.BaseCategory1;
 import com.atguigu.gmall.model.product.BaseCategory2;
 import com.atguigu.gmall.model.product.BaseCategory3;
+import com.atguigu.gmall.model.product.BaseCategoryView;
+import com.atguigu.gmall.model.to.CategoryAndChildTo;
 import com.atguigu.gmall.product.dao.BaseCategory2Dao;
 import com.atguigu.gmall.product.dao.BaseCategory3Dao;
 import com.atguigu.gmall.product.dao.BaseCategoryDao;
@@ -49,5 +51,20 @@ public class BaseCategoryServiceImpl implements BaseCategoryService {
         queryWrapper.eq("category2_id",category2Id);
         List<BaseCategory3> baseCategory3s = baseCategory3Dao.selectList(queryWrapper);
         return baseCategory3s;
+    }
+
+    @Override
+    public List<CategoryAndChildTo> getAllCategoryWithChilds() {
+
+
+        return baseCategoryDao.getAllCategoryWithChilds();
+    }
+
+    @Override
+    public BaseCategoryView getSkuCategoryView(Long skuId) {
+
+        BaseCategoryView view = baseCategoryDao.getSkuCategoryView(skuId);
+
+        return view;
     }
 }
