@@ -1,5 +1,7 @@
 package com.atguigu.gmall.product.service.impl;
 
+
+import com.atguigu.gmall.common.constants.RedisConst;
 import com.atguigu.gmall.model.product.BaseCategory1;
 import com.atguigu.gmall.model.product.BaseCategory2;
 import com.atguigu.gmall.model.product.BaseCategory3;
@@ -9,12 +11,16 @@ import com.atguigu.gmall.product.dao.BaseCategory2Dao;
 import com.atguigu.gmall.product.dao.BaseCategory3Dao;
 import com.atguigu.gmall.product.dao.BaseCategoryDao;
 import com.atguigu.gmall.product.service.BaseCategoryService;
+import com.atguigu.gmall.product.service.CacheService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class BaseCategoryServiceImpl implements BaseCategoryService {
@@ -28,6 +34,15 @@ public class BaseCategoryServiceImpl implements BaseCategoryService {
 
     @Autowired
     BaseCategory3Dao baseCategory3Dao;
+
+    @Autowired
+    CacheService cacheService;
+
+    /**
+     * 缓存
+     * @return
+     */
+  //  Map<String,Object> cache = new ConcurrentHashMap<>();
 
     @Override
     public List<BaseCategory1> getCategory1() {
@@ -55,9 +70,18 @@ public class BaseCategoryServiceImpl implements BaseCategoryService {
 
     @Override
     public List<CategoryAndChildTo> getAllCategoryWithChilds() {
+        //1. 查询缓存
+        Object cacheData = cacheService.getCacheData(RedisConst.CATEGORY_CACHE_KEY, new TypeReference<List<CategoryAndChildTo>>() {
+        });
 
-
-        return baseCategoryDao.getAllCategoryWithChilds();
+        if (cacheData == null){
+            //2. 缓存没有查询数据库
+            List<CategoryAndChildTo> childs = baseCategoryDao.getAllCategoryWithChilds();
+            cacheService.save(RedisConst.CATEGORY_CACHE_KEY,childs);
+            return childs;
+        }
+        // 有缓存 直接返回缓存数据
+        return (List<CategoryAndChildTo>) cacheData;
     }
 
     @Override

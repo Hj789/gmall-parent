@@ -55,7 +55,7 @@ public class ItemController {
 
             //${valueSkuJson}: 所有实际存在的sku组合
             //5. 当前spu可用的所有sku销售属性组合
-            model.addAttribute("valueSkuJson",detailData.getValuesSkuJson());
+            model.addAttribute("valuesSkuJson",detailData.getValuesSkuJson());
         }
 
 

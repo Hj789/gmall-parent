@@ -1,5 +1,18 @@
 server:
   port: 9000
+#  tomcat:
+#    threads:
+#      max: 300
+#使用线程池合适参数,利用少量资源,提供大量的吞吐能力
 spring:
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+
+app:
+  threadpool:
+    core-pool-size: 16
+    maximum-pool-size: 32
+    keep-alive-time: 1 #以分钟为单位
+    queue-size: 5000 #系统的稳定峰值,队列一大就会导致OOM
+    #控制了资源
