@@ -23,6 +23,19 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>23.0</version>
+        </dependency>
+
+        <!--引入缓存、redisson-->
+        <dependency>
+            <groupId>com.atguigu.gmall</groupId>
+            <artifactId>service-util</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
 

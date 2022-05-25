@@ -38,4 +38,11 @@ public interface SkuInfoService extends IService<SkuInfo> {
      * @return
      */
     List<SpuSaleAttr> getSkudeSpuSaleAttrAndValue(Long skuId);
+
+    /**
+     * 查询出所有的skuId
+     * @return
+     */
+    List<Long> getAllSkuIds();
+
 }

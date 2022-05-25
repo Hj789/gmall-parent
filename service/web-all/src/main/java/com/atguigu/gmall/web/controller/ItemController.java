@@ -2,6 +2,7 @@ package com.atguigu.gmall.web.controller;
 
 import com.atguigu.gmall.common.result.Result;
 import com.atguigu.gmall.feign.item.ItemFeignClient;
+import com.atguigu.gmall.feign.product.ProductFeignClient;
 import com.atguigu.gmall.model.to.SkuDetailTo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +11,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.math.BigDecimal;
+
 @Slf4j
 @Controller
 public class ItemController {
 
     @Autowired
     ItemFeignClient itemFeignClient;
+
+    @Autowired
+    ProductFeignClient productFeignClient;
 
     /**
      * 商品详情服务:
@@ -44,9 +50,6 @@ public class ItemController {
             //skuId,skuName,skuDefaultImg,skuImageList
             model.addAttribute("skuInfo",detailData.getSkuInfo());
 
-            //3. sku的价格
-            model.addAttribute("price",detailData.getPrice());
-
 
             //${spuSaleAttrList}; 定义的所有版本
             //4. sku的spu所有销售属性集合
@@ -58,6 +61,12 @@ public class ItemController {
             model.addAttribute("valuesSkuJson",detailData.getValuesSkuJson());
         }
 
+
+        Result<BigDecimal> skuPrice = productFeignClient.getPrice(skuId);
+        if (skuPrice.isOk()){
+            //3. sku的价格
+            model.addAttribute("price",skuPrice.getData());
+        }
 
 
         return "item/index";

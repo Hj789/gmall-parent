@@ -1,4 +1,4 @@
-package com.atguigu.gmall.product.service;
+package com.atguigu.gmall.cache;
 
 import com.atguigu.gmall.model.to.CategoryAndChildTo;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -12,10 +12,10 @@ public interface CacheService {
 
     /**
      * 从缓存获取一个数据
-     * @param categoryCacheKey
+     * @param cacheKey
      * @return
      */
-    <T> T getCacheData(String categoryCacheKey, TypeReference<T> typeReference);
+    <T> T getCacheData(String cacheKey, TypeReference<T> typeReference);
 
     /**
      * 给缓存中保存数据

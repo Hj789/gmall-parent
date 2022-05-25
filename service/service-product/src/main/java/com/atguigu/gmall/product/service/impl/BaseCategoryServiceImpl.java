@@ -11,7 +11,7 @@ import com.atguigu.gmall.product.dao.BaseCategory2Dao;
 import com.atguigu.gmall.product.dao.BaseCategory3Dao;
 import com.atguigu.gmall.product.dao.BaseCategoryDao;
 import com.atguigu.gmall.product.service.BaseCategoryService;
-import com.atguigu.gmall.product.service.CacheService;
+import com.atguigu.gmall.cache.CacheService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +19,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class BaseCategoryServiceImpl implements BaseCategoryService {
