@@ -2,12 +2,17 @@ server:
   port: 7000
 
 #数据源
+#application-xxx.yaml  java -jar xxx.jar --spring.profiles.active=sharding
 spring:
-  datasource:
-    url: jdbc:mysql://192.168.203.203:3306/gmall_product?useSSL=false
-    username: root
-    password: root
-    driver-class-name: com.mysql.jdbc.Driver
+  profiles:
+    include: sharding  #当前application的配置包含 sharding 的配置
+
+#  datasource:
+#    url: jdbc:mysql://192.168.203.203:3306/gmall_product?useSSL=false
+#    username: root
+#    password: root
+#    driver-class-name: com.mysql.jdbc.Driver
+
   redis:
     host: 192.168.203.203
     password: Hj123!@!

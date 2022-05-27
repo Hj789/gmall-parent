@@ -12,6 +12,7 @@ import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.expression.Expression;
 import org.springframework.expression.ParserContext;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
@@ -22,6 +23,9 @@ import org.springframework.util.StringUtils;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Component
@@ -36,6 +40,13 @@ public class CacheHelper {
     RedissonClient redissonClient;
     @Autowired
     Map<String,RBloomFilter<Object>> bloomMap;
+    @Autowired
+    StringRedisTemplate redisTemplate;
+
+
+    //定时任务线程池
+    ScheduledExecutorService threadPool = Executors.newScheduledThreadPool(5);
+
 
     /**
      *
@@ -167,5 +178,20 @@ public class CacheHelper {
 
         //2. 拿到目标方法上的注解
         return AnnotationUtils.findAnnotation(method, Cache.class);
+    }
+
+    public void deleteCache(String key) {
+        //一定做
+        redisTemplate.delete(key); //90%
+//        Thread.sleep(10);
+
+        //立即提交给线程池,不能保证一定运行
+        threadPool.schedule(()->{
+            redisTemplate.delete(key); //99%
+        },10, TimeUnit.SECONDS);
+
+        //save数据有过期时间 100%,保证脏数据不会再系统中永久保存
+
+        //完全实时?自己查库; 1主N从;【读写分离】
     }
 }

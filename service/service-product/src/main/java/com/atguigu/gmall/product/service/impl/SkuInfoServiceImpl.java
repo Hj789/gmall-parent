@@ -5,6 +5,7 @@ import com.atguigu.gmall.product.mapper.SpuSaleAttrMapper;
 import com.atguigu.gmall.product.service.SkuAttrValueService;
 import com.atguigu.gmall.product.service.SkuImageService;
 import com.atguigu.gmall.product.service.SkuSaleAttrValueService;
+import com.atguigu.gmall.starter.cache.aop.CacheHelper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.atguigu.gmall.product.service.SkuInfoService;
 import com.atguigu.gmall.product.mapper.SkuInfoMapper;
@@ -12,6 +13,7 @@ import org.redisson.api.RBloomFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -40,9 +42,13 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfo> impl
     @Autowired
     RBloomFilter<Object> skuIdBloom;
 
+    @Autowired
+    CacheHelper cacheHelper;
 
+    @Transactional
     @Override
     public void saveSkuInfo(SkuInfo skuInfo) {
+        Long id = skuInfo.getId();
         //1、SkuInfo 的基本信息  保存到 sku_info
         skuInfoMapper.insert(skuInfo);
 
@@ -75,6 +81,9 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfo> impl
             attrValue.setSpuId(skuInfo.getSpuId());
         }
         skuSaleAttrValueService.saveBatch(skuSaleAttrValueList);
+
+        //删除缓存.快
+        cacheHelper.deleteCache("sku:detail:47");
 
 
     }
