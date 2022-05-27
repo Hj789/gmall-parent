@@ -10,5 +10,7 @@ Content-Type: application/json
 "tmName": "锤子",
  "logoUrl": "123"
 }
+### 重建布隆
+GET http://localhost/admin/product/rebuild
 
 ###

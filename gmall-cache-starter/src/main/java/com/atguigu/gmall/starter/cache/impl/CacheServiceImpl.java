@@ -1,7 +1,7 @@
-package com.atguigu.gmall.cache.impl;
+package com.atguigu.gmall.starter.cache.impl;
 
-import com.atguigu.gmall.cache.CacheService;
-import com.atguigu.gmall.common.util.JSONs;
+import com.atguigu.gmall.starter.cache.CacheService;
+import com.atguigu.gmall.starter.utils.JSONs;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;

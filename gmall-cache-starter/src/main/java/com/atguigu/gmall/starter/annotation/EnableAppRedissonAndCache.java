@@ -1,8 +1,7 @@
-package com.atguigu.gmall.annotation;
+package com.atguigu.gmall.starter.annotation;
 
-import com.atguigu.gmall.cache.impl.CacheServiceImpl;
-import com.atguigu.gmall.config.threadPool.AppThreadPoolAutoConfiguration;
-import com.atguigu.gmall.redisson.AppRedissonAutoConfiguration;
+import com.atguigu.gmall.starter.cache.impl.CacheServiceImpl;
+import com.atguigu.gmall.starter.redisson.AppRedissonAutoConfiguration;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;

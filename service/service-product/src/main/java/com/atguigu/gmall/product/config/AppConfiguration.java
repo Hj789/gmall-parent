@@ -1,10 +1,9 @@
 package com.atguigu.gmall.product.config;
 
-import com.atguigu.gmall.annotation.EnableAppRedissonAndCache;
-import com.atguigu.gmall.annotation.EnableAppSwaggerApi;
-import com.atguigu.gmall.annotation.EnableAutoHandleException;
-import com.atguigu.gmall.annotation.EnableMinio;
+import com.atguigu.gmall.annotation.*;
 import com.atguigu.gmall.config.AppMybatisPlusConfiguratoin;
+import com.atguigu.gmall.starter.annotation.EnableAppRedissonAndCache;
+import com.atguigu.gmall.starter.annotation.EnableAutoCache;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -21,7 +20,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableAutoHandleException
 @EnableAppSwaggerApi
 @EnableScheduling
-@EnableAppRedissonAndCache //既能用到缓存组件,还能用到redissonClient
+//@EnableAutoCache //开启自动缓存功能
+//@EnableAppRedissonAndCache
 public class AppConfiguration {
 
     //额外配置写到这里

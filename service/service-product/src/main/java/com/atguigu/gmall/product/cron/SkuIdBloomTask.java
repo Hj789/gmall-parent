@@ -1,8 +1,7 @@
 package com.atguigu.gmall.product.cron;
 
 import com.atguigu.gmall.product.service.SkuInfoService;
-import com.atguigu.gmall.redisson.BloomTask;
-import com.atguigu.gmall.redisson.SkuBloomTask;
+import com.atguigu.gmall.starter.redisson.SkuBloomTask;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RBloomFilter;
 import org.springframework.beans.factory.annotation.Autowired;

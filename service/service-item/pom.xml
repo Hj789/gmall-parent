@@ -36,6 +36,13 @@
             <artifactId>service-util</artifactId>
             <version>1.0</version>
         </dependency>
+        <!--只需要引入缓存场景-->
+        <dependency>
+            <groupId>com.atguigu.gmall</groupId>
+            <artifactId>gmall-cache-starter</artifactId>
+            <version>1.0</version>
+        </dependency>
+
     </dependencies>
 
 

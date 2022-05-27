@@ -1,6 +1,6 @@
-package com.atguigu.gmall.redisson;
+package com.atguigu.gmall.starter.redisson;
 
-import com.atguigu.gmall.common.constants.RedisConst;
+import com.atguigu.gmall.starter.constant.RedisConst;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;
 import org.redisson.api.RBloomFilter;
@@ -31,7 +31,6 @@ public class AppRedissonAutoConfiguration {
     List<BloomTask> bloomTask;
 
     /**
-     *
      * @param redisProperties 自动注入redis的配置
      * @return
      */
@@ -39,6 +38,7 @@ public class AppRedissonAutoConfiguration {
     public RedissonClient redissonClient(RedisProperties redisProperties){
         Config config = new Config();
         //Redis url should start with redis:// or rediss:// (for SSL connection)
+        config.setLockWatchdogTimeout(30*1000); //看门狗时间
         config.useSingleServer()
                 .setAddress("redis://"+redisProperties.getHost()+":"+redisProperties.getPort())
                 .setPassword(redisProperties.getPassword());
@@ -52,7 +52,7 @@ public class AppRedissonAutoConfiguration {
      */
     @Bean
     public  RBloomFilter<Object> skuIdBloom(RedissonClient redissonClient){
-        RBloomFilter<Object> filter = redissonClient.getBloomFilter(RedisConst.BOOM_SKU_ID);
+        RBloomFilter<Object> filter = redissonClient.getBloomFilter(RedisConst.BLOOM_SKU_ID);
 
         if (filter.isExists()) {
             //如果存在,代表有这个布隆

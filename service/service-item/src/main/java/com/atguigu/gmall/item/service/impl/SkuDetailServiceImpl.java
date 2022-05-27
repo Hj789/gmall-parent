@@ -1,10 +1,11 @@
 package com.atguigu.gmall.item.service.impl;
 
-import com.atguigu.gmall.cache.CacheService;
+import com.atguigu.gmall.starter.cache.CacheService;
 import com.atguigu.gmall.common.constants.RedisConst;
 import com.atguigu.gmall.common.result.Result;
-import com.atguigu.gmall.common.util.JSONs;
+import com.atguigu.gmall.starter.utils.JSONs;
 import com.atguigu.gmall.feign.product.ProductFeignClient;
+import com.atguigu.gmall.starter.cache.aop.annotation.Cache;
 import com.atguigu.gmall.item.service.SkuDetailService;
 import com.atguigu.gmall.model.product.BaseCategoryView;
 import com.atguigu.gmall.model.product.SkuInfo;
@@ -13,6 +14,8 @@ import com.atguigu.gmall.model.to.SkuDetailTo;
 import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RBloomFilter;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
@@ -45,6 +48,83 @@ public class SkuDetailServiceImpl implements SkuDetailService {
 
     @Autowired
     StringRedisTemplate redisTemplate;
+    @Autowired
+    RedissonClient redissonClient;
+
+    //使用bloomName指定的布隆过滤器判定bloomValue是否存在
+    @Cache(cacheKey = RedisConst.SKU_CACHE_KEY_PREFIX+"#{#args[0]}",bloomName = "skuIdBloom",bloomValue = "#{#args[0]}" )
+    @Override
+    public SkuDetailTo getSkuDetail(Long skuId) {
+        log.info("正在从数据库确定商品详情信息:SkuDetail:{} ", skuId);
+        return getSkuDetailFromDb(skuId);
+    }
+
+    /**
+     * 查询商品详情,使用redisson提供的分布式锁
+     * @param skuId
+     * @return
+     */
+    public SkuDetailTo getSkuDetailWithRedissonLock(Long skuId) {
+        String cacheKey = RedisConst.SKU_CACHE_KEY_PREFIX + skuId;
+        //1. 查询缓存
+        SkuDetailTo cacheData = cacheService.getCacheData(cacheKey,
+                new TypeReference<SkuDetailTo>() {
+                });
+        // 判断
+        if (cacheData == null) {
+            //2 缓存中没有,查库[回源]
+            //回源之前,先问下布隆,这个东西有没有
+            log.info("SkuDetail:{}: 缓存没命中,准备回源", skuId);
+            //4.布隆中有
+            if (skuIdBloom.contains(skuId)) {
+                log.info("SkuDetail:{}: 布隆过滤通过",skuId);
+                //5.开始查库,加锁防止击穿
+                RLock lock = redissonClient.getLock(RedisConst.SKUDETAIL_LOCK_PREFIX + skuId);
+                //6. 加锁
+                boolean tryLock = false; //自动解锁+自动续期
+                try {
+                    tryLock = lock.tryLock();
+                    //7. 加锁成功
+                    if (tryLock){
+                        log.info("SkuDetail:{}: 回源锁加锁成功", skuId);
+                        SkuDetailTo detail = getSkuDetailFromDb(skuId);
+                        //保存到缓存【防null穿透,防雪崩】
+                        cacheService.save(cacheKey,detail);
+                        log.info("SkuDetail:{}: 成功查询数据", skuId);
+                        return detail;
+                    }
+                }finally {
+                    try {
+                        //解锁
+                        if (tryLock) lock.unlock();
+                        log.info("SkuDetail:{}: 回源解锁成功", skuId);
+                    }catch (Exception e){
+                        log.info("SkuDetail:{}: 又想解别人锁了~~~~~~", skuId);
+                    }
+                }
+
+                //8. 加锁失败,等待1s直接查缓存
+                log.info("SkuDetail:{}: 回源锁加锁失败,1s后直接看缓存即可", skuId);
+                try {
+                    Thread.sleep(1000);
+                    cacheData = cacheService.getCacheData(cacheKey,
+                            new TypeReference<SkuDetailTo>() {
+                            });
+                    return cacheData;
+                } catch (InterruptedException e) {
+                    log.info("SkuDetail:{}: 睡眠异常", skuId);
+                }
+
+            }
+
+            //3. 布隆不通过
+            log.info("SkuDetail:{}: 布隆过滤打回",skuId);
+            return null;
+        }
+        //缓存不为null,直接返回
+        log.info("SkuDetail:{}: 缓存命中....", skuId);
+        return cacheData;
+    }
 
 
     /**
@@ -56,8 +136,7 @@ public class SkuDetailServiceImpl implements SkuDetailService {
      * @param skuId
      * @return
      */
-    @Override
-    public SkuDetailTo getSkuDetail(Long skuId) {
+    public SkuDetailTo getSkuDetailWithRedisDistLock(Long skuId) {
         String cacheKey = RedisConst.SKU_CACHE_KEY_PREFIX + skuId;
         //1. 查询缓存
         SkuDetailTo cacheData = cacheService.getCacheData(cacheKey,
@@ -145,6 +224,7 @@ public class SkuDetailServiceImpl implements SkuDetailService {
 
 
 
+
     /**
      * 商品详情服务:
      * 查询sku详情得做这么多事
@@ -207,6 +287,7 @@ public class SkuDetailServiceImpl implements SkuDetailService {
 
         return detailTo;
     }
+
 
 
 }
