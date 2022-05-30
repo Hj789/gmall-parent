@@ -38,7 +38,7 @@ public class Goods {
     @Field(type = FieldType.Keyword)
     private String tmName;
 
-    @Field(type = FieldType.Keyword)
+    @Field(type = FieldType.Keyword,index = false)
     private String tmLogoUrl;
 
     @Field(type = FieldType.Long)
@@ -65,7 +65,7 @@ public class Goods {
 
     // 平台属性集合对象
     // Nested 支持嵌套查询
-    @Field(type = FieldType.Nested)
-    private List<SearchAttr> attrs;
+    @Field(type = FieldType.Nested) //嵌入式的对象
+    private List<SearchAttr> attrs;//平台属性,要用来检索 ;集合类型结果
 
 }

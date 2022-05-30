@@ -79,8 +79,9 @@ POST /hello/_search Content-Type: application/json
 "name": "王"
 }
 
-}, "_source": ["name","age"], "size": 20, "sort": [
-
+},
+"_source": ["name","age"], "size": 20,
+"sort": [
 {
 "age": {
 "order": "desc"

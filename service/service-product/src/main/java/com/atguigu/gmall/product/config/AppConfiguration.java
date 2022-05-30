@@ -5,6 +5,7 @@ import com.atguigu.gmall.config.AppMybatisPlusConfiguratoin;
 import com.atguigu.gmall.starter.annotation.EnableAppRedissonAndCache;
 import com.atguigu.gmall.starter.annotation.EnableAutoCache;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -20,6 +21,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableAutoHandleException
 @EnableAppSwaggerApi
 @EnableScheduling
+@EnableFeignClients("com.atguigu.gmall.feign.list")
 //@EnableAutoCache //开启自动缓存功能
 //@EnableAppRedissonAndCache
 public class AppConfiguration {
