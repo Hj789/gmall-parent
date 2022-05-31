@@ -30,4 +30,13 @@ public interface SearchFeignClient {
     @PostMapping("/goods/search")
     Result<GoodsSearchResultVo> searchGoods(@RequestBody SearchParam param);
 
+    /**
+     * 远程更新热度得分
+     * @param skuId
+     * @param score
+     * @return
+     */
+    @GetMapping("/goods/incrHotScore/{skuId}")
+    Result updateHotScore(@PathVariable("skuId") Long skuId,@RequestParam("hotScore") Long score);
+
 }

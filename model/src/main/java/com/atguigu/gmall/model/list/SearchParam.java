@@ -17,7 +17,7 @@ public class SearchParam {
 
     // 排序规则
     // 1:hotScore 2:price
-    private String order = ""; // 1：综合排序/热点  2：价格
+    private String order = "1:desc"; // 1：综合排序/热点  2：价格
 
     // props=23:4G:运行内存
     //平台属性Id 平台属性值名称 平台属性名

@@ -1,5 +1,6 @@
 package com.atguigu.gmall.item.service.impl;
 
+import com.atguigu.gmall.feign.list.SearchFeignClient;
 import com.atguigu.gmall.starter.cache.CacheService;
 import com.atguigu.gmall.common.constants.RedisConst;
 import com.atguigu.gmall.common.result.Result;
@@ -29,6 +30,7 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 @Service
@@ -36,6 +38,9 @@ public class SkuDetailServiceImpl implements SkuDetailService {
 
     @Autowired
     ProductFeignClient productFeignClient;
+
+    @Autowired
+    SearchFeignClient searchFeignClient;
 
     @Autowired
     ThreadPoolExecutor corePool;
@@ -51,12 +56,28 @@ public class SkuDetailServiceImpl implements SkuDetailService {
     @Autowired
     RedissonClient redissonClient;
 
+//    @Autowired
+//    AtomicInteger atomicInteger;
+
     //使用bloomName指定的布隆过滤器判定bloomValue是否存在
     @Cache(cacheKey = RedisConst.SKU_CACHE_KEY_PREFIX+"#{#args[0]}",bloomName = "skuIdBloom",bloomValue = "#{#args[0]}" )
     @Override
     public SkuDetailTo getSkuDetail(Long skuId) {
         log.info("正在从数据库确定商品详情信息:SkuDetail:{} ", skuId);
         return getSkuDetailFromDb(skuId);
+    }
+
+    @Override
+    public void incrHotScore(Long skuId) {
+        //累计到100人以后增加一次,去redis中热度+1
+//        int i = atomicInteger.incrementAndGet();
+//        if (i%100 == 0){
+//        }
+        Double score = redisTemplate.opsForZSet().incrementScore(RedisConst.SKU_HOTSCORE, skuId.toString(), 1.0);
+        if (score%100 == 0){
+            //调用ES远程增加热度
+            searchFeignClient.updateHotScore(skuId,score.longValue());
+        }
     }
 
     /**

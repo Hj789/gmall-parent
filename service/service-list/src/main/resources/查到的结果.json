@@ -1,495 +1,125 @@
+//GET /goods/_search
+//检索、分析(基于查到的结果计算出这些手机涉及到多少品牌、平台属性名和值等)  terms 值分布
 {
-  "took": 5,
-  "timed_out": false,
-  "_shards": {
-    "total": 3,
-    "successful": 3,
-    "skipped": 0,
-    "failed": 0
-  },
-  "hits": {
-    "total": {
-      "value": 11,
-      "relation": "eq"
-    },
-    "max_score": 1.0,
-    "hits": [
-      {
-        "_index": "goods",
-        "_type": "_doc",
-        "_id": "44",
-        "_version": 3,
-        "_score": 1.0,
-        "_source": {
-          "_class": "com.atguigu.gmall.model.list.Goods",
-          "id": 44,
-          "defaultImg": "http://39.99.159.121:9000/gmall/16230513636548bd01a398e614d2bab5fd3366883b1b7.png",
-          "title": "小米 CC9 PLUS 手机 美颜自拍 游戏手机 仙女渐变色(美图定制版) 4G全网通 6GB+128GB",
-          "price": 2200.0,
-          "createTime": "2022-05-28 06:36:41",
-          "tmId": 4,
-          "tmName": "小米",
-          "tmLogoUrl": "http://192.168.200.130:9000/gmall/1c0441bcf500467db5069a4df527f9ec_xiaomi.png",
-          "category1Id": 2,
-          "category1Name": "手机",
-          "category2Id": 13,
-          "category2Name": "手机通讯",
-          "category3Id": 61,
-          "category3Name": "手机",
-          "hotScore": 0,
-          "attrs": [
-            {
-              "attrId": 1,
-              "attrValue": "1700-2799",
-              "attrName": "价格"
-            },
-            {
-              "attrId": 2,
-              "attrValue": "6.65-6.74英寸",
-              "attrName": "屏幕尺寸"
-            },
-            {
-              "attrId": 3,
-              "attrValue": "6GB",
-              "attrName": "运行内存"
-            },
-            {
-              "attrId": 4,
-              "attrValue": "128GB",
-              "attrName": "机身存储"
-            },
-            {
-              "attrId": 5,
-              "attrValue": "骁龙730",
-              "attrName": "CPU型号"
-            }
-          ]
-        }
-      },
-      {
-        "_index": "goods",
-        "_type": "_doc",
-        "_id": "43",
-        "_version": 3,
-        "_score": 1.0,
-        "_source": {
-          "_class": "com.atguigu.gmall.model.list.Goods",
-          "id": 43,
-          "defaultImg": "http://39.99.159.121:9000/gmall/16230513636548bd01a398e614d2bab5fd3366883b1b7.png",
-          "title": "小米 CC9 手机 美颜自拍 游戏手机 仙女渐变色（美图定制版） 全网通 6GB+128GB",
-          "price": 2200.0,
-          "createTime": "2022-05-28 06:36:42",
-          "tmId": 4,
-          "tmName": "小米",
-          "tmLogoUrl": "http://192.168.200.130:9000/gmall/1c0441bcf500467db5069a4df527f9ec_xiaomi.png",
-          "category1Id": 2,
-          "category1Name": "手机",
-          "category2Id": 13,
-          "category2Name": "手机通讯",
-          "category3Id": 61,
-          "category3Name": "手机",
-          "hotScore": 0,
-          "attrs": [
-            {
-              "attrId": 1,
-              "attrValue": "1700-2799",
-              "attrName": "价格"
-            },
-            {
-              "attrId": 2,
-              "attrValue": "6.45-6.54英寸",
-              "attrName": "屏幕尺寸"
-            },
-            {
-              "attrId": 3,
-              "attrValue": "6GB",
-              "attrName": "运行内存"
-            },
-            {
-              "attrId": 4,
-              "attrValue": "128GB",
-              "attrName": "机身存储"
-            },
-            {
-              "attrId": 5,
-              "attrValue": "其它",
-              "attrName": "CPU型号"
-            }
-          ]
-        }
-      },
-      {
-        "_index": "goods",
-        "_type": "_doc",
-        "_id": "42",
-        "_version": 3,
-        "_score": 1.0,
-        "_source": {
-          "_class": "com.atguigu.gmall.model.list.Goods",
-          "id": 42,
-          "defaultImg": "http://39.99.159.121:9000/gmall/1623051371250259ddd7c89704bd19db874fa7906ce0e.png",
-          "title": "小米 CC9 手机 美颜自拍 游戏手机 蓝色（深蓝星球） 全网通 6GB+128GB",
-          "price": 1943.0,
-          "createTime": "2022-05-28 06:36:42",
-          "tmId": 4,
-          "tmName": "小米",
-          "tmLogoUrl": "http://192.168.200.130:9000/gmall/1c0441bcf500467db5069a4df527f9ec_xiaomi.png",
-          "category1Id": 2,
-          "category1Name": "手机",
-          "category2Id": 13,
-          "category2Name": "手机通讯",
-          "category3Id": 61,
-          "category3Name": "手机",
-          "hotScore": 0,
-          "attrs": [
-            {
-              "attrId": 1,
-              "attrValue": "1700-2799",
-              "attrName": "价格"
-            },
-            {
-              "attrId": 2,
-              "attrValue": "6.75-6.84英寸",
-              "attrName": "屏幕尺寸"
-            },
-            {
-              "attrId": 3,
-              "attrValue": "6GB",
-              "attrName": "运行内存"
-            },
-            {
-              "attrId": 4,
-              "attrValue": "128GB",
-              "attrName": "机身存储"
-            },
-            {
-              "attrId": 5,
-              "attrValue": "其它",
-              "attrName": "CPU型号"
-            }
-          ]
-        }
-      }
-    ]
-  },
-  "aggregations": {
-    "lterms#tmIdAgg": {
-      "doc_count_error_upper_bound": 0,
-      "sum_other_doc_count": 0,
-      "buckets": [
+  "query": {
+    "bool": {
+      "must": [
+        {"term": {
+          "category3Id": {
+            "value": "61"
+          }
+        }},
+        {"term": {
+          "tmId": {
+            "value": "4"
+          }
+        }},
         {
-          "key": 4,
-          "doc_count": 5,
-          "sterms#tmNameAgg": {
-            "doc_count_error_upper_bound": 0,
-            "sum_other_doc_count": 0,
-            "buckets": [
-              {
-                "key": "小米",
-                "doc_count": 5
+          "nested": {
+            "path": "attrs",
+            "query": {
+              "bool": {
+                "must": [
+                  {"term": {
+                    "attrs.attrId": {
+                      "value": "5"
+                    }
+                  }},
+                  {"term": {
+                    "attrs.attrValue": {
+                      "value": "骁龙855"
+                    }
+                  }}
+                ]
               }
-            ]
-          },
-          "sterms#tmLogoUrlAgg": {
-            "doc_count_error_upper_bound": 0,
-            "sum_other_doc_count": 0,
-            "buckets": [
-              {
-                "key": "http://192.168.200.130:9000/gmall/1c0441bcf500467db5069a4df527f9ec_xiaomi.png",
-                "doc_count": 5
-              }
-            ]
+            }
           }
         },
         {
-          "key": 2,
-          "doc_count": 4,
-          "sterms#tmNameAgg": {
-            "doc_count_error_upper_bound": 0,
-            "sum_other_doc_count": 0,
-            "buckets": [
-              {
-                "key": "华为",
-                "doc_count": 4
+          "nested": {
+            "path": "attrs",
+            "query": {
+              "bool": {
+                "must": [
+                  {"term": {
+                    "attrs.attrId": {
+                      "value": "4"
+                    }
+                  }},
+                  {"term": {
+                    "attrs.attrValue": {
+                      "value": "64GB"
+                    }
+                  }}
+                ]
               }
-            ]
-          },
-          "sterms#tmLogoUrlAgg": {
-            "doc_count_error_upper_bound": 0,
-            "sum_other_doc_count": 0,
-            "buckets": [
-              {
-                "key": "http://192.168.200.130:9000/gmall/cd16c94759e543859f74b12ae8e59db9_华为.png",
-                "doc_count": 4
-              }
-            ]
+            }
           }
         },
         {
-          "key": 5,
-          "doc_count": 2,
-          "sterms#tmNameAgg": {
-            "doc_count_error_upper_bound": 0,
-            "sum_other_doc_count": 0,
-            "buckets": [
-              {
-                "key": "oppo",
-                "doc_count": 2
-              }
-            ]
-          },
-          "sterms#tmLogoUrlAgg": {
-            "doc_count_error_upper_bound": 0,
-            "sum_other_doc_count": 0,
-            "buckets": [
-              {
-                "key": "http://192.168.200.130:9000/gmall/3c9f133b524840209c1c5e0af4c636fb_oppo.png",
-                "doc_count": 2
-              }
-            ]
+          "match": {
+            "title": "手机"
           }
         }
       ]
+    }
+  },
+  "sort": [
+    {
+      "hotScore": {
+        "order": "desc"
+      }
+    }
+  ],
+  "from": 0,
+  "size": 20,
+  "aggs": {
+    "tmIdAgg": {
+      "terms": {
+        "field": "tmId",
+        "size": 100
+      },
+      "aggs": {
+        "tmNameAgg": {
+          "terms": {
+            "field": "tmName",
+            "size": 1
+          }
+        },
+        "tmLogoUrlAgg":{
+          "terms": {
+            "field": "tmLogoUrl",
+            "size": 1
+          }
+        }
+      }
     },
-    "nested#attrsAgg": {
-      "doc_count": 59,
-      "lterms#attrIdAgg": {
-        "doc_count_error_upper_bound": 0,
-        "sum_other_doc_count": 0,
-        "buckets": [
-          {
-            "key": 1,
-            "doc_count": 11,
-            "sterms#attrNameAgg": {
-              "doc_count_error_upper_bound": 0,
-              "sum_other_doc_count": 0,
-              "buckets": [
-                {
-                  "key": "价格",
-                  "doc_count": 11
-                }
-              ]
-            },
-            "sterms#attrValueAgg": {
-              "doc_count_error_upper_bound": 0,
-              "sum_other_doc_count": 0,
-              "buckets": [
-                {
-                  "key": "1700-2799",
-                  "doc_count": 4
-                },
-                {
-                  "key": "2800-4499",
-                  "doc_count": 4
-                },
-                {
-                  "key": "4500-11999",
-                  "doc_count": 2
-                },
-                {
-                  "key": "1000-1699",
-                  "doc_count": 1
-                }
-              ]
-            }
+    "attrsAgg": {
+      "nested": {
+        "path": "attrs"
+
+      },
+      "aggs": {
+        "attrIdAgg": {
+          "terms": {
+            "field": "attrs.attrId",
+            "size": 100
           },
-          {
-            "key": 2,
-            "doc_count": 11,
-            "sterms#attrNameAgg": {
-              "doc_count_error_upper_bound": 0,
-              "sum_other_doc_count": 0,
-              "buckets": [
-                {
-                  "key": "屏幕尺寸",
-                  "doc_count": 11
-                }
-              ]
+          "aggs": {
+            "attrNameAgg": {
+              "terms": {
+                "field": "attrs.attrName",
+                "size": 1
+              }
             },
-            "sterms#attrValueAgg": {
-              "doc_count_error_upper_bound": 0,
-              "sum_other_doc_count": 0,
-              "buckets": [
-                {
-                  "key": " 6.95英寸及以上",
-                  "doc_count": 5
-                },
-                {
-                  "key": "6.75-6.84英寸",
-                  "doc_count": 2
-                },
-                {
-                  "key": "6.0～6.24英寸",
-                  "doc_count": 1
-                },
-                {
-                  "key": "6.45-6.54英寸",
-                  "doc_count": 1
-                },
-                {
-                  "key": "6.55-6.64英寸",
-                  "doc_count": 1
-                },
-                {
-                  "key": "6.65-6.74英寸",
-                  "doc_count": 1
-                }
-              ]
-            }
-          },
-          {
-            "key": 3,
-            "doc_count": 11,
-            "sterms#attrNameAgg": {
-              "doc_count_error_upper_bound": 0,
-              "sum_other_doc_count": 0,
-              "buckets": [
-                {
-                  "key": "运行内存",
-                  "doc_count": 11
-                }
-              ]
-            },
-            "sterms#attrValueAgg": {
-              "doc_count_error_upper_bound": 0,
-              "sum_other_doc_count": 0,
-              "buckets": [
-                {
-                  "key": "8GB",
-                  "doc_count": 6
-                },
-                {
-                  "key": "6GB",
-                  "doc_count": 5
-                }
-              ]
-            }
-          },
-          {
-            "key": 4,
-            "doc_count": 11,
-            "sterms#attrNameAgg": {
-              "doc_count_error_upper_bound": 0,
-              "sum_other_doc_count": 0,
-              "buckets": [
-                {
-                  "key": "机身存储",
-                  "doc_count": 11
-                }
-              ]
-            },
-            "sterms#attrValueAgg": {
-              "doc_count_error_upper_bound": 0,
-              "sum_other_doc_count": 0,
-              "buckets": [
-                {
-                  "key": "128GB",
-                  "doc_count": 7
-                },
-                {
-                  "key": "256GB",
-                  "doc_count": 3
-                },
-                {
-                  "key": "64GB",
-                  "doc_count": 1
-                }
-              ]
-            }
-          },
-          {
-            "key": 5,
-            "doc_count": 11,
-            "sterms#attrNameAgg": {
-              "doc_count_error_upper_bound": 0,
-              "sum_other_doc_count": 0,
-              "buckets": [
-                {
-                  "key": "CPU型号",
-                  "doc_count": 11
-                }
-              ]
-            },
-            "sterms#attrValueAgg": {
-              "doc_count_error_upper_bound": 0,
-              "sum_other_doc_count": 0,
-              "buckets": [
-                {
-                  "key": "麒麟990",
-                  "doc_count": 4
-                },
-                {
-                  "key": "骁龙855",
-                  "doc_count": 3
-                },
-                {
-                  "key": "其它",
-                  "doc_count": 2
-                },
-                {
-                  "key": "骁龙730",
-                  "doc_count": 1
-                },
-                {
-                  "key": "骁龙845",
-                  "doc_count": 1
-                }
-              ]
-            }
-          },
-          {
-            "key": 7,
-            "doc_count": 2,
-            "sterms#attrNameAgg": {
-              "doc_count_error_upper_bound": 0,
-              "sum_other_doc_count": 0,
-              "buckets": [
-                {
-                  "key": "s1",
-                  "doc_count": 2
-                }
-              ]
-            },
-            "sterms#attrValueAgg": {
-              "doc_count_error_upper_bound": 0,
-              "sum_other_doc_count": 0,
-              "buckets": [
-                {
-                  "key": "ss",
-                  "doc_count": 2
-                }
-              ]
-            }
-          },
-          {
-            "key": 11,
-            "doc_count": 2,
-            "sterms#attrNameAgg": {
-              "doc_count_error_upper_bound": 0,
-              "sum_other_doc_count": 0,
-              "buckets": [
-                {
-                  "key": "出厂日期",
-                  "doc_count": 2
-                }
-              ]
-            },
-            "sterms#attrValueAgg": {
-              "doc_count_error_upper_bound": 0,
-              "sum_other_doc_count": 0,
-              "buckets": [
-                {
-                  "key": "2020以后",
-                  "doc_count": 1
-                },
-                {
-                  "key": "2020及以前",
-                  "doc_count": 1
-                }
-              ]
+            "attrValueAgg": {
+              "terms": {
+                "field": "attrs.attrValue",
+                "size": 100
+              }
             }
           }
-        ]
+        }
       }
     }
   }

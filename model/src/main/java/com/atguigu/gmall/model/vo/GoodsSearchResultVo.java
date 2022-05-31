@@ -21,8 +21,8 @@ public class GoodsSearchResultVo {
     private List<SearchAttrListVo> attrsList; //检索区：平台属性列表信息
     private SearchOrderMapVo orderMap; //排序条件
     private List<Goods> goodsList;  //检索到的所有商品集合
-    private Long pageNo;//当前页
-    private Long totalPages;//总页码
+    private Integer pageNo;//当前页
+    private Integer totalPages;//总页码
 
 
 }

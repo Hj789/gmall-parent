@@ -9,4 +9,11 @@ public interface SkuDetailService {
      * @return
      */
     SkuDetailTo getSkuDetail(Long skuId);
+
+    /**
+     * 增加当前skuId的热度
+     *
+     * @param skuId
+     */
+    void incrHotScore(Long skuId);
 }

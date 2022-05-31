@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * 检索功能控制器
  */
@@ -61,8 +63,10 @@ public class ListController {
      * @return
      */
     @GetMapping("/list.html")
-    public String searchPage(SearchParam param, Model model){
-
+    public String searchPage(SearchParam param, Model model, HttpServletRequest request){
+        //获取url?后面的所有东西【查询字符串】
+        //order不用拼
+//        String urlParam = "list.html?" + request.getQueryString();
         //TODO 远程调用检索服务去检索
         Result<GoodsSearchResultVo> searchGoods = searchFeignClient.searchGoods(param);
 

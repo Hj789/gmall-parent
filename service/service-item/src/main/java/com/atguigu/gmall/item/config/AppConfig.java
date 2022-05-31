@@ -11,7 +11,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 //@EnableAppRedissonAndCache
 @EnableAspectJAutoProxy //开启切面自动代理功能
 @EnableAppDoubleThreadPool
-@EnableFeignClients(basePackages = {"com.atguigu.gmall.feign.product"})
+@EnableFeignClients(basePackages = {"com.atguigu.gmall.feign.product","com.atguigu.gmall.feign.list"})
 @Configuration
 public class AppConfig {
 
