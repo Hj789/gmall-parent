@@ -4,6 +4,13 @@ server:
 #配置请求转发规则
 #断言
 spring:
+  redis:
+    host: 192.168.203.203
+    password: Hj123!@!
+#    lettuce:  #响应式编程中不要配置普通的池
+#      pool:
+#        max-active: 16
+#        min-idle: 0
   cloud:
     gateway:
       globalcors:
@@ -19,7 +26,27 @@ spring:
           uri: lb://service-product
           predicates:
             - Path=/admin/product/**
+
+        - id: user_route
+          uri: lb://service-user
+          predicates:
+            - Path=/api/user/**
+
         - id: web_all_route
           uri: lb://web-all
           predicates:
             - Host=**.gmall.com,gmall.com
+
+
+app:
+  auth:
+    anyoneurls:  #所有人无需登录就能访问的url
+      - /js/**
+      - /css/**
+      - /img/**
+      - /static/**
+    denyurls:  #任何情况下都拒绝访问。
+      - /rpc/inner/**
+    authurls: #必须登陆才能访问的请求
+      - /order.html
+    loginPage: http://passport.gmall.com/login.html

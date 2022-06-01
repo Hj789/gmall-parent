@@ -165,7 +165,7 @@ public class GoodsSearchServiceImpl implements GoodsSearchService {
         if (!StringUtils.isEmpty(param.getKeyword())){
             //模糊检索的条件下给匹配上的值加上高亮
             HighlightBuilder builder = new HighlightBuilder();
-            builder.field("title").preTags("<span style ='color':red>").postTags("</span>");
+            builder.field("title").preTags("<span style ='color:red'>").postTags("</span>");
             HighlightQuery query = new HighlightQuery(builder);
             dsl.setHighlightQuery(query);
         }
@@ -262,21 +262,24 @@ public class GoodsSearchServiceImpl implements GoodsSearchService {
         List<Goods> goods = Lists.newArrayList();
         //提取所有查到的商品
         for (SearchHit<Goods> hit : hits) {
-            //
+            //获取命中记录的真正商品数据
             Goods item = hit.getContent(); //hits中每个记录的_source部分
+
+            if (!StringUtils.isEmpty(param.getKeyword())){
+                String title = hit.getHighlightField("title").get(0);
+                item.setTitle(title);
+            }
+            //如果是模糊检索需要用高亮的标题来替换原标题
             goods.add(item);
         }
+        resultVo.setGoodsList(goods);
 
         //9. 页码
-        resultVo.setGoodsList(goods);
         resultVo.setPageNo(param.getPageNo());
         Long pages = hits.getTotalHits() % param.getPageSize() == 0 ? hits.getTotalHits() / param.getPageSize() : (hits.getTotalHits() / param.getPageSize() + 1);
         resultVo.setTotalPages(pages.intValue());
 
         //TODO 翻页溢出总是最后一页
-
-
-
 
         return resultVo;
 

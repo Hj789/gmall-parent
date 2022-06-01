@@ -8,23 +8,14 @@
         <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <description>所有商城的页面都放在这里</description>
 
-    <artifactId>web-all</artifactId>
+    <artifactId>service-user</artifactId>
+    <description>用户服务</description>
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <groupId>org.apache.shardingsphere</groupId>
+            <artifactId>shardingsphere-jdbc-core-spring-boot-starter</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>com.atguigu.gmall</groupId>
-            <artifactId>service-feign-client</artifactId>
-            <version>1.0</version>
-        </dependency>
-
     </dependencies>
-
-
 </project>

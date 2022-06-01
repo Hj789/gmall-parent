@@ -2,6 +2,7 @@ package com.atguigu.gmall.model.user;
 
 import com.atguigu.gmall.model.base.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -44,5 +45,9 @@ public class UserInfo extends BaseEntity {
     @ApiModelProperty(value = "用户级别")
     @TableField("user_level")
     private String userLevel;
+
+    //数据库无此字段
+    @TableField(exist = false)
+    private String ipAddr;
 
 }
