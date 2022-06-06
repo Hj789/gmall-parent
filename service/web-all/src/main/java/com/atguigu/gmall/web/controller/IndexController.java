@@ -19,7 +19,7 @@ public class IndexController {
     @Autowired
     ProductFeignClient productFeignClient;
 
-    @GetMapping("/")
+    @GetMapping({"/","/index.html"})
     public String indexPage(Model model){
         log.info("首页.....");
 

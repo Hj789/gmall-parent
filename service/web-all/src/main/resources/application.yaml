@@ -7,3 +7,7 @@ spring:
     prefix: classpath:/templates/
     suffix: .html
     enabled: true
+
+
+
+

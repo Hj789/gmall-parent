@@ -18,7 +18,7 @@ public class CarInfoVo implements Serializable {
     */
    // 不同的skuId 对应相同的活动
    @ApiModelProperty(value = "cartInfoList")
-   private List<CartInfo> cartInfoList;
+   private List<CartItem> cartInfoList;
 
    // activityRuleList 存储的是同一个活动
    @ApiModelProperty(value = "活动规则列表")

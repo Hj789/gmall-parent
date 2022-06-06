@@ -54,6 +54,8 @@ public class UserAuthFilter implements GlobalFilter {
 
     /**
      * 所有请求到达目标服务之前,都得先过这个方法
+     *
+     * 分心所有请求带来的token或者userTempId 把他们透传给其他微服务
      * @param exchange 代表原来的请求和响应
      * @param chain    代表原来的过滤器链
      * @return
@@ -120,12 +122,23 @@ public class UserAuthFilter implements GlobalFilter {
             }
         }
 
-        //正常请求
+        //4. 正常请求 : 如果登录需要透传UserId
         //1.前端没带还是带错了
         String token = getToken(request);
         if (StringUtils.isEmpty(token)){
-            //没带没事,直接放行
-            return chain.filter(exchange);
+            //没带没事,直接放行; 有可能带了userTempId  把这个也透传
+            String userTempId = getUserTempId(request);
+            //透传
+            ServerHttpRequest newRequest = exchange.getRequest()
+                    .mutate() //克隆一个
+                    .header("UserTempId", userTempId)
+                    .build();
+            //从原exchange克隆一个新的exchange
+            ServerWebExchange build = exchange.mutate() //克隆一个exchange
+                    .request(newRequest)
+                    .response(exchange.getResponse())
+                    .build();
+            return chain.filter(build);
         }else {
             //带了就必须对
             boolean validateToken = validateToken(request);
@@ -137,11 +150,14 @@ public class UserAuthFilter implements GlobalFilter {
                 ServerHttpRequest orginRequest = exchange.getRequest();
                 //拿到userInfo信息
                 UserInfo userInfo = getTokenRedisValue(token, IpUtil.getGatwayIpAddress(orginRequest));
+               //获取临时id
+                String userTempId = getUserTempId(request);
                 //自己加一个userId请求头
                 //从原请求克隆一个新请求
                 ServerHttpRequest newRequest = exchange.getRequest()
                         .mutate() //克隆一个
                         .header("UserId", userInfo.getId().toString())
+                        .header("UserTempId",userTempId)
                         .build();
                 //从原exchange克隆一个新的exchange
                 ServerWebExchange build = exchange.mutate() //克隆一个exchange
@@ -151,6 +167,27 @@ public class UserAuthFilter implements GlobalFilter {
                 return chain.filter(build);
             }
         }
+
+    }
+
+    /**
+     * 获取用户临时id   userTempId
+     * @param request
+     * @return
+     */
+    private String getUserTempId(ServerHttpRequest request) {
+        //1.获取token: 【cookie：token=xxxx】【直接在请求头中有个token=xxxx】
+        String userTempId = "";
+        HttpCookie cookie = request.getCookies().getFirst("userTempId");
+        //有这个cookie,说明前端把token放到在cookie位置,给我们带来了
+        if (cookie != null){
+            userTempId = cookie.getValue();
+        }else {
+            //前端没有放在cookie位置上
+            String headerValue = request.getHeaders().getFirst("userTempId");
+            userTempId = headerValue;
+        }
+        return userTempId;
 
     }
 
