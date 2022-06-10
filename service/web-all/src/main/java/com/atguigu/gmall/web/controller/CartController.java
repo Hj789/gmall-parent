@@ -59,4 +59,11 @@ public class CartController {
         return "cart/addCart"; //商品添加成功的提示页
     }
 
+    //cart/deleteChecked
+    @GetMapping("/cart/deleteChecked")
+    public String deleteChecked(){
+
+        cartFeignClient.deleteCartChecked();
+        return "cart/index";
+    }
 }

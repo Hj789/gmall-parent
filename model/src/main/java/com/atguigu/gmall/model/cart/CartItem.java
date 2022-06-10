@@ -50,7 +50,7 @@ public class CartItem  {
     private BigDecimal cartPrice;
 
     // 实时价格 skuInfo.price
-    BigDecimal skuPrice;
+    private BigDecimal skuPrice;
 
 
 }

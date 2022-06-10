@@ -21,6 +21,9 @@ public class OrderDetail extends BaseEntity {
     @TableField("order_id")
     private Long orderId;
 
+    @TableField("user_id")
+    private Long userId;
+
     @ApiModelProperty(value = "sku_id")
     @TableField("sku_id")
     private Long skuId;

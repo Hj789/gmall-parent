@@ -1,5 +1,6 @@
 package com.atguigu.gmall.model.enums;
 
+//订单的进度状态
 public enum ProcessStatus {
     UNPAID("未支付", OrderStatus.UNPAID),
     PAID("已支付", OrderStatus.PAID),

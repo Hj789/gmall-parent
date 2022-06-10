@@ -13,6 +13,7 @@
         <module>service</module>
         <module>service-gateway</module>
         <module>gmall-cache-starter</module>
+        <module>ware-manage</module>
     </modules>
     <packaging>pom</packaging>
 

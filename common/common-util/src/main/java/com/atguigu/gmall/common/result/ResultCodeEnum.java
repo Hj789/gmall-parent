@@ -26,10 +26,17 @@ public enum ResultCodeEnum {
     SECKILL_END(214, "秒杀已结束"),
     SECKILL_SUCCESS(215, "抢单成功"),
     SECKILL_FAIL(216, "抢单失败"),
-    SECKILL_ILLEGAL(217, "请求不合法"),
+    SECKILL_ILLEGAL(217, "秒杀请求不合法"),
     SECKILL_ORDER_SUCCESS(218, "下单成功"),
     COUPON_GET(220, "优惠券已经领取"),
     COUPON_LIMIT_GET(221, "优惠券已发放完毕"),
+
+    CART_OVERFLOW(300,"购物车数量溢出"),
+    CART_MERGE_OVERFLOW(301,"购物车合并数量超出限制,请移除部分商品"),
+    PARAM_INVALIDA(400,"参数非法"),
+    REQ_ILLEGAL_TOKEN_ERROR(5000,"页面过期,请刷新页面"),
+    ORDER_PRICE_CHANGE(6000,"订单中的商品,有价格发生变化,请刷新页面重新确认"),
+    PRODUCT_NO_STOCK(7000,"商品库存不足")
     ;
 
     private Integer code;

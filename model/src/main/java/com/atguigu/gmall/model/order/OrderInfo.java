@@ -22,7 +22,7 @@ import java.util.Map;
 
 @Data
 @ApiModel(description = "订单信息")
-@TableName("order_info")
+@TableName("order_info")  //这个表数据库没有此表名,逻辑表
 public class OrderInfo extends BaseEntity {
     private static final long serialVersionUID = 1L;
 

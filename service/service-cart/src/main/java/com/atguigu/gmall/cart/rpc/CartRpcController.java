@@ -12,6 +12,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RestController
 @RequestMapping("/rpc/inner/cart")
@@ -37,5 +38,28 @@ public class CartRpcController {
 
         CartItem cartItem = cartService.addSkuToCart(skuId,skuNum);
         return Result.ok(cartItem);
+    }
+
+    /**
+     * 删除选中的商品
+     * @return
+     */
+    @GetMapping("/delete/checked")
+    public Result deleteCartChecked(){
+
+        cartService.deleteChecked();
+
+        return Result.ok();
+    }
+
+    /**
+     * 获取所有选中的商品列表
+     * @return
+     */
+    @GetMapping("/checked/list")
+    public Result<List<CartItem>> getCheckItem(){
+
+        List<CartItem> cartItems = cartService.getCheckList();
+        return Result.ok(cartItems);
     }
 }
