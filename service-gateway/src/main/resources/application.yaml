@@ -42,6 +42,11 @@ spring:
           predicates:
             - Path=/api/cart/**
 
+        - id: pay_route
+          uri: lb://service-pay
+          predicates:
+            - Path=/api/payment/**
+
         - id: web_all_route
           uri: lb://web-all
           predicates:

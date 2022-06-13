@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  *
  */
@@ -33,6 +35,32 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
 
 
 
+    }
+
+    @Override
+    public void updateOrderStatusToPaid(String outTradeNo, long userId, String processStatus, String orderStatus) {
+        orderInfoMapper.updateOrderStatusToPaid(outTradeNo,userId,processStatus,orderStatus);
+    }
+
+    @Override
+    public List<OrderInfo> getOrderAndDetailByOutTradeNo(String outTradeNo) {
+        long userId = Long.parseLong(outTradeNo.split("-")[2]);
+
+
+        List<OrderInfo> orderInfo = orderInfoMapper.getOrderAndDetailByOutTradeNo(userId,outTradeNo);
+
+        return orderInfo;
+
+    }
+
+    @Override
+    public void updateOrderStatusToSpilt(ProcessStatus split, Long userId, Long id) {
+        orderInfoMapper.updateStatus(split.name(),split.getOrderStatus().name(),userId,id);
+    }
+
+    @Override
+    public void updateStatusByOrderId(Long orderId, ProcessStatus newStatus) {
+        orderInfoMapper.updateStatusById(newStatus.name(),newStatus.getOrderStatus().name(),orderId);
     }
 }
 

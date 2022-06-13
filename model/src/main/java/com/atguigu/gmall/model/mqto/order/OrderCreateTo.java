@@ -1,4 +1,4 @@
-package com.atguigu.gmall.model.mqto;
+package com.atguigu.gmall.model.mqto.order;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -92,6 +92,10 @@ public class OrderInfo extends BaseEntity {
     @TableField("img_url")
     private String imgUrl;
 
+    //查询出当前订单的所有订单项
+    @TableField(exist = false)
+    private List<OrderDetail> details;
+
     @TableField(exist = false)
     private List<OrderDetail> orderDetailList;
 

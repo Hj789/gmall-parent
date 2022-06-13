@@ -4,6 +4,8 @@ import com.atguigu.gmall.model.enums.ProcessStatus;
 import com.atguigu.gmall.model.order.OrderInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  *
  */
@@ -17,4 +19,35 @@ public interface OrderInfoService extends IService<OrderInfo> {
      * @param userId        用户id
      */
     void updateOrderStatus(ProcessStatus originStatus, ProcessStatus modifyStatus, Long orderId, Long userId);
+
+    /**
+     * 修改订单为已支付
+     * @param outTradeNo
+     * @param userId
+     * @param processStatus
+     * @param orderStatus
+     */
+    void updateOrderStatusToPaid(String outTradeNo, long userId, String processStatus, String orderStatus);
+
+    /**
+     * 根据tradeNo找到订单以及订单详情
+     * @param outTradeNo
+     * @return
+     */
+    List<OrderInfo> getOrderAndDetailByOutTradeNo(String outTradeNo);
+
+    /**
+     * 修改订单状态为已拆分
+     * @param split
+     * @param userId
+     * @param id
+     */
+    void updateOrderStatusToSpilt(ProcessStatus split, Long userId, Long id);
+
+    /**
+     * 修改订单状态
+     * @param orderId
+     * @param newStatus
+     */
+    void updateStatusByOrderId(Long orderId, ProcessStatus newStatus);
 }

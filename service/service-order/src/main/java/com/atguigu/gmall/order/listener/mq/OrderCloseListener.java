@@ -3,7 +3,7 @@ package com.atguigu.gmall.order.listener.mq;
 import com.atguigu.gmall.common.constants.MqConst;
 import com.atguigu.gmall.common.util.JSONs;
 import com.atguigu.gmall.model.enums.ProcessStatus;
-import com.atguigu.gmall.model.mqto.OrderCreateTo;
+import com.atguigu.gmall.model.mqto.order.OrderCreateTo;
 import com.atguigu.gmall.order.service.OrderInfoService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.rabbitmq.client.Channel;
@@ -58,9 +58,6 @@ public class OrderCloseListener {
         }catch (Exception e){
             log.error("订单关闭发送错误。错误：{}，订单信息：{}",e,create);
         }
-
-
-
 
         try {
             channel.basicAck( message.getMessageProperties().getDeliveryTag(),false);

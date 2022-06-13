@@ -126,5 +126,25 @@ public class OrderMqComponentConfig {
                 null);
     }
 
+    /**
+     * 支付成功单队列
+     */
+    @Bean
+    public Queue payedQueue(){
+        return new Queue(MqConst.ORDER_PAYED_QUEUE,true,false,false);
+    }
+
+
+    @Bean
+    public Binding orderPayedBinding(){
+
+        return new Binding(MqConst.ORDER_PAYED_QUEUE,
+                Binding.DestinationType.QUEUE,
+                MqConst.ORDER_EVENT_EXCHANGE,
+                MqConst.RK_ORDER_PAYED,
+                null);
+    }
+
+
 
 }

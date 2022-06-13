@@ -14,3 +14,6 @@ Content-Type: application/json
 GET http://localhost/admin/product/rebuild
 
 ###
+POST  http://28n9fk.natappfree.cc/api/payment/notify/success
+
+###

@@ -67,7 +67,9 @@ public class UserAuthFilter implements GlobalFilter {
         //响应式编程 ServerHttpRequest ServerHttpResponse
         ServerHttpRequest request = exchange.getRequest();
         String path = request.getURI().getPath(); //只要访问路径
-
+        if(matcher.match("/api/payment/**",path)){
+            System.err.println("支付宝异步通知来了..."+path);
+        };
 
         log.info("UserAuthFilter 开始拦截:请求路径:{}", path);
 
