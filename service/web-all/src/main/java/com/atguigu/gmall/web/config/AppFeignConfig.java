@@ -15,7 +15,8 @@ import org.springframework.context.annotation.Configuration;
         "com.atguigu.gmall.feign.list",
         "com.atguigu.gmall.feign.user",
         "com.atguigu.gmall.feign.item",
-        "com.atguigu.gmall.feign.order"})
+        "com.atguigu.gmall.feign.order",
+        "com.atguigu.gmall.feign.seckill"})
 @Configuration
 public class AppFeignConfig {
 }

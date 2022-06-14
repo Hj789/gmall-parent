@@ -27,4 +27,6 @@ public @interface Cache {
     //如果启动布隆过滤器，布隆过滤器判断用的值
     String bloomValue() default "";
 
+    //指定缓存的数据时间
+
 }

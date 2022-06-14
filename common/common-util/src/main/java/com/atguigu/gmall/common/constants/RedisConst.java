@@ -17,5 +17,8 @@ public class RedisConst {
     public static final Long CART_SIZE_LIMIT = 200L;
     public static final String NO_REPEAT_TOKEN = "norepeat:token:";
 
+    public static final String SECKILL_GOODS_CACHE_PREFIX = "seckill:goods:"; //后面加上当天时间
+    public static final String SECKILL_CODE_CACHE_PREFIX = "seckill:code:"; //后面加上秒杀码
+    public static final String SECKILL_ORDER_TEMP_CACHE = "seckill:orders:"; //加上userId+dateStr+skuId
 }
 
